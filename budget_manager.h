@@ -1,25 +1,30 @@
 #pragma once
 
-#include <vector>
 #include "date.h"
-#include "parser.h"
+
+#include <vector>
+
+struct DayState {
+    double income = 0;
+};
 
 class BudgetManager {
 public:
     static const Date START_DATE;
     static const Date END_DATE;
 
-    BudgetManager()
-        : budget_() {
-        size_t days = Date::ComputeDistance(START_DATE, END_DATE);
-        budget_.reserve(days);
-        for (size_t i = 0; i < days; ++i) {
-            budget_.emplace_back(START_DATE + i, 0.0);
-        }
+    static int GetDayIndex(const Date& day) {
+        return Date::ComputeDistance(START_DATE, day);
     }
 
-    void ProcessQuery(const Query& query);
+    DayState& GetDayState(int index) {
+        return days_[index];
+    }
+
+    [[nodiscard]] const DayState& GetDayState(int index) const {
+        return days_[index];
+    }
 
 private:
-    std::vector<std::pair<Date, double> > budget_;
+    std::vector<DayState> days_ = std::vector<DayState>(GetDayIndex(END_DATE));
 };

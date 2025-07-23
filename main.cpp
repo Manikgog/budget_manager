@@ -1,16 +1,17 @@
 #include "budget_manager.h"
+#include "parser.h"
 
 #include <iostream>
 #include <string_view>
 
-
 void ParseAndProcessQuery(BudgetManager& manager, std::string_view line) {
-    // Разработайте функцию чтения и обработки запроса.
-    Parser parser;
-    if (std::optional<Query> op_query = parser.ParseLine(line); op_query.has_value()) {
-        const Query& query = op_query.value();
-        manager.ProcessQuery(query);
+    auto query = ParseQuery(line);
+
+    if (!query) {
+        return;
     }
+
+    query->ProcessAndPrint(manager, std::cout);
 }
 
 int ReadNumberOnLine(std::istream& input) {
