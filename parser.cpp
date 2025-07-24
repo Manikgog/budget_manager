@@ -14,7 +14,7 @@ std::unique_ptr<Query> Parser::ParseLine(std::string_view line) {
     } else if (operation_and_text.first == "ComputeIncome") {
         return std::make_unique<Query>(operation_and_text.first, first_date, second_date);
     } else if (operation_and_text.first == "PayTax") {
-        const double tax = std::stod(second_date_and_text.second);
+        const int tax = std::stoi(second_date_and_text.second);
         return std::make_unique<PayTaxQuery>(operation_and_text.first, first_date, second_date, tax);
     } else if (operation_and_text.first == "Spend") {
         const double spend = std::stod(second_date_and_text.second);

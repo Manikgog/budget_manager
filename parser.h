@@ -43,13 +43,13 @@ public:
 
 
 class PayTaxQuery : public Query {
-    double tax_;
+    int tax_;
 public:
-    PayTaxQuery(const std::string& operation_name, const Date& start_date, const Date& end_date, double tax)
+    PayTaxQuery(const std::string& operation_name, const Date& start_date, const Date& end_date, int tax)
         : Query(operation_name, start_date, end_date)
         , tax_(tax) {}
 
-    [[nodiscard]] double GetTax() const {
+    [[nodiscard]] int GetTax() const {
         return tax_;
     }
 };
