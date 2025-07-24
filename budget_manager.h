@@ -5,8 +5,12 @@
 #include <vector>
 
 struct DayState {
+    [[nodiscard]] double ComputeIncome() const {
+        return income - spent;
+    }
+
     double income = 0;
-    double spend = 0;
+    double spent = 0;
 };
 
 class BudgetManager {
