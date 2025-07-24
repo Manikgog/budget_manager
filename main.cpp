@@ -7,9 +7,12 @@
 void ParseAndProcessQuery(BudgetManager& manager, std::string_view line) {
     // Разработайте функцию чтения и обработки запроса.
     Parser parser;
-    if (std::optional<Query> op_query = parser.ParseLine(line); op_query.has_value()) {
-        const Query& query = op_query.value();
-        manager.ProcessQuery(query);
+    if (std::optional<std::unique_ptr<Query>> op_query = parser.ParseLine(line); op_query.has_value()) {
+        auto query = std::move(op_query.value());
+        if (!query) {
+            return;
+        }
+        manager.ProcessQuery(std::move(query));
     }
 }
 

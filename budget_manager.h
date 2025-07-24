@@ -18,7 +18,7 @@ public:
         }
     }
 
-    void ProcessQuery(const Query& query);
+    void ProcessQuery(std::unique_ptr<Query> query);
 
 private:
     std::vector<std::pair<Date, double> > budget_;
