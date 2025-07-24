@@ -4,6 +4,11 @@
 #include "date.h"
 #include "parser.h"
 
+struct OneDayBudget {
+    double income_ = 0;
+    double spend_ = 0;
+};
+
 class BudgetManager {
 public:
     static const Date START_DATE;
@@ -21,5 +26,5 @@ public:
     void ProcessQuery(std::unique_ptr<Query> query);
 
 private:
-    std::vector<std::pair<Date, double> > budget_;
+    std::vector<std::pair<Date, OneDayBudget> > budget_;
 };
