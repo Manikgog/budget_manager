@@ -6,6 +6,7 @@
 
 struct DayState {
     double income = 0;
+    double spend = 0;
 };
 
 class BudgetManager {
