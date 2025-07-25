@@ -7,11 +7,11 @@
 
 class Date {
 public:
-    // explicit Date(const std::string& str) {
-    //     std::istringstream input(str);
-    //     std::chrono::from_stream(input, "%Y-%m-%d", ymd_);
-    // }
     explicit Date(const std::string& str) {
+         std::istringstream input(str);
+         std::chrono::from_stream(input, "%Y-%m-%d", ymd_);
+    }
+    /*explicit Date(const std::string& str) {
         std::istringstream iss(str);
         int year, month, day;
         char sep;
@@ -24,7 +24,7 @@ public:
         if (!ymd_.ok()) {
             throw std::runtime_error("Invalid date");
         }
-    }
+    }*/
 
     explicit Date(std::string_view str)
         : Date(std::string(str)) {
